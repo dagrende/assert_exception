@@ -36,7 +36,7 @@ class TestMainVerticle {
 		}
 	
 	@Test
-	void smallText(Vertx vertx, VertxTestContext testContext) {
+	void smallTest(Vertx vertx, VertxTestContext testContext) {
 		testContext.verify(()->{
 			assertEquals(1, 0);
 			testContext.completeNow();
