@@ -47,22 +47,20 @@ class TestMainVerticle {
 	void testRequest(Vertx vertx, VertxTestContext testContext) {
 		vertx.deployVerticle(new MainVerticle(), testContext.succeeding(id -> {
 			System.out.println("id: " + id);
-			assertEquals("12", id);
-
-//			WebClient client = WebClient.create(vertx);
-//			client.get(8888, "localhost", "/")
-//			.as(BodyCodec.string())
-//			.send(res -> {
-//				if (res.failed()) {
-//					System.err.println(res.cause());
-//				} else {
-//					HttpResponse<String> result = res.result();
-//					System.out.println("body: " + result.body());
-//					assertEquals(200, result.statusCode());
-//					assertEquals("Hi!", result.body());
-//				}
-//				testContext.completeNow();
-//			});
+			WebClient client = WebClient.create(vertx);
+			client.get(8888, "localhost", "/")
+			.as(BodyCodec.string())
+			.send(res -> {
+				if (res.failed()) {
+					System.err.println(res.cause());
+				} else {
+					HttpResponse<String> result = res.result();
+					System.out.println("body: " + result.body());
+					assertEquals(200, result.statusCode());
+					assertEquals("Hi!", result.body());
+				}
+				testContext.completeNow();
+			});
 		}));
 	}
 }
